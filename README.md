@@ -1,37 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 Generador de Cuestionarios con IA para Wooclap
 
-URL: https://quiz-0c1a.onrender.com/
-## Getting Started
+Aplicación web desarrollada con **Next.js y TypeScript** que utiliza Inteligencia Artificial para generar cuestionarios tipo test a partir de documentos.
 
-First, run the development server:
+El usuario puede cargar material docente, generar preguntas mediante **Google Gemini**, revisar y editar el contenido generado y exportarlo posteriormente a un archivo Excel para su utilización en **Wooclap**.
+
+## 🌐 Aplicación
+
+La aplicación está disponible en:
+
+**https://quiz-0c1a.onrender.com/**
+
+## 🚀 Puesta en marcha
+
+### Requisitos
+
+* Node.js
+* npm
+* Una clave de API de Google Gemini
+
+### Instalación
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/cce-ops/quiz-wooclap.git
+cd quiz-wooclap
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+### Variables de entorno
+
+Crea un archivo `.env.local` en la raíz del proyecto y añade la clave de API de Gemini:
+
+```env
+GEMINI_API_KEY=tu_clave_de_gemini
+```
+
+### Servidor de desarrollo
+
+Ejecuta:
 
 ```bash
 npm run dev
-# or
+```
+
+También pueden utilizarse otros gestores de paquetes compatibles con el proyecto:
+
+```bash
 yarn dev
-# or
+```
+
+```bash
 pnpm dev
-# or
+```
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Una vez iniciado el servidor, abre:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**http://localhost:3000**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Los cambios realizados en el código se reflejarán automáticamente durante el desarrollo.
 
-## Learn More
+## 🛠️ Tecnologías
 
-To learn more about Next.js, take a look at the following resources:
+* **Next.js**
+* **React**
+* **TypeScript**
+* **Tailwind CSS**
+* **Google Gemini**
+* **Node.js**
+* **Excel / XLSX**
+* **Wooclap**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📚 Recursos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Si quieres consultar la documentación del framework utilizado:
 
-## Deploy on Vercel
+* [Documentación de Next.js](https://nextjs.org/docs)
+* [Aprender Next.js](https://nextjs.org/learn)
+* [Repositorio de Next.js](https://github.com/vercel/next.js)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Para ejecutar la aplicación en producción:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run start
+```
+
