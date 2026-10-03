@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const buffer = buildWooclapBuffer(questions);
+    const buffer = await buildWooclapBuffer(questions);
     const bytes = new Uint8Array(buffer);
     return new NextResponse(bytes, {
       headers: {

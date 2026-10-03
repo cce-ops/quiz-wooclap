@@ -1,0 +1,66 @@
+# Pre-commit hooks for security and code quality
+# Install: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # Secret detection
+  - repo: https://github.com/trufflesecurity/trufflehog
+    rev: v3.88.0
+    hooks:
+      - id: trufflehog
+        name: TruffleHog Secret Detection
+        entry: trufflehog filesystem --no-verification --fail
+        language: system
+        types: [file]
+        exclude: ^(package-lock\.json|pnpm-lock\.yaml|yarn\.lock)$
+
+  # SAST with Semgrep
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.179.0
+    hooks:
+      - id: semgrep
+        name: Semgrep SAST
+        entry: semgrep scan --config=auto --error
+        language: system
+        types: [typescript, javascript, json, tsx]
+        exclude: ^(node_modules/|\.next/)$
+
+  # npm audit (high/critical only)
+  - repo: local
+    hooks:
+      - id: npm-audit
+        name: npm audit (high/critical)
+        entry: bash -c 'if [ -f package.json ]; then npm audit --audit-level=high --json > /dev/null; fi'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  # TypeScript type checking
+  - repo: local
+    hooks:
+      - id: tsc-check
+        name: TypeScript type check
+        entry: npx tsc --noEmit
+        language: system
+        types: [typescript, tsx]
+        exclude: ^(node_modules/|\.next/)$
+
+  # ESLint
+  - repo: local
+    hooks:
+      - id: eslint
+        name: ESLint
+        entry: npx eslint
+        language: system
+        types: [typescript, javascript, tsx]
+        exclude: ^(node_modules/|\.next/)$
+
+  # Prettier formatting
+  - repo: https://github.com/prettier/prettier
+    rev: v3.3.3
+    hooks:
+      - id: prettier
+        name: Prettier formatter
+        language: system
+        types: [typescript, javascript, json, html, css, markdown, yaml]
+        exclude: ^(node_modules/|\.next/|package-lock\.json)$
