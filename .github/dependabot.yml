@@ -1,0 +1,67 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      nextjs:
+        patterns:
+          - "next*"
+          - "react*"
+          - "@types/react*"
+        update-types:
+          - "minor"
+          - "patch"
+      ui-libraries:
+        patterns:
+          - "@base-ui/*"
+          - "lucide-react"
+          - "class-variance-authority"
+          - "tailwindcss*"
+          - "tw-animate-css"
+        update-types:
+          - "minor"
+          - "patch"
+      ai-doc-processing:
+        patterns:
+          - "@google/generative-ai"
+          - "pdf-parse"
+          - "mammoth"
+          - "docx"
+          - "exceljs"
+          - "jszip"
+          - "xlsx"
+        update-types:
+          - "minor"
+          - "patch"
+      tooling:
+        patterns:
+          - "eslint*"
+          - "typescript*"
+          - "shadcn"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
