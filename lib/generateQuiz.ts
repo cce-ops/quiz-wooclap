@@ -4,6 +4,7 @@ import type { Question, QuizResult } from "@/types";
 
 /** Modelos a probar en orden. Si uno falla tras reintentar, pasa al siguiente. */
 const MODELS = [
+  "gemini-flash-latest",
   "gemini-3.8-flash",
   "gemini-3.7-flash",
   "gemini-3.6-flash",
