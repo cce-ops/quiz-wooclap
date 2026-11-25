@@ -1,6 +1,42 @@
 import mammoth from "mammoth";
 import { PDFParse } from "pdf-parse";
 import JSZip from "jszip";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { createRequire } from "node:module";
+
+const requireFromHere = createRequire(import.meta.url);
+
+function resolvePdfWorkerUrl(): string {
+  // Prefer resolving the installed package so the path follows node_modules
+  // even when Next.js bundles this module into a server chunk.
+  try {
+    const pkgJson = requireFromHere.resolve("pdf-parse/package.json");
+    const workerPath = path.join(
+      path.dirname(pkgJson),
+      "dist",
+      "pdf-parse",
+      "esm",
+      "pdf.worker.mjs"
+    );
+    return pathToFileURL(workerPath).href;
+  } catch {
+    // Fallback for environments where resolution is unavailable.
+    const workerPath = path.join(
+      process.cwd(),
+      "node_modules",
+      "pdf-parse",
+      "dist",
+      "pdf-parse",
+      "esm",
+      "pdf.worker.mjs"
+    );
+    return pathToFileURL(workerPath).href;
+  }
+}
+
+// Configure pdfjs worker once for server-side parsing.
+PDFParse.setWorker(resolvePdfWorkerUrl());
 
 export const MAX_CHARS = 90000;
 /** Rechazo por archivo en servidor (evita colgar memoria). */
